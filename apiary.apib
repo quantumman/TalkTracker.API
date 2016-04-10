@@ -1,0 +1,248 @@
+FORMAT: 1A
+HOST: https://talktracker.io/api/v1
+
+# TalkTracker API
+
+TalkTracker is a simple API allowing consumers to access resources of TalkTracker.
+
+## Data Structures
+
+### Project (object)
++ id: 43 (number, required)
++ name: Test Project (string, required)
++ description: This is test project (string)
++ created_at: `2015-08-05T08:40:51.620Z` (string, required)
++ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
++ team: alpha@team.co.jp (string, required)
++ team_id: 102 (number, required)
++ activity_url: https://talktracker.io/api/v1/{team}/projects/{id}/activities (string, required)
++ messages_url: https://talktracker.io/api/v1/{team}/projects/{id}/messages (string, required)
++ tasks_url: https://talktracker.io/api/v1/{team}/projects/{id}/tasks (string, required)
++ settings_url: https://talktracker.io/api/v1/{team}/projects/{id}/settings (string, required)
+
+### Project Post (object)
++ name: New project (string, required)
++ description: This is test project
+
+### Message (object)
++ id: 101 (number, required)
++ title: adjald (string, required)
++ body: hoge (string, required)
++ state: open (string, required)
++ creator (User)
++ created_at
++ comments_url: https://talktracker.io/api/v1/{team}/projects/{id}/messages/{messageid}/comments (string, required)
+
+### Message Post (object)
++ title: afgfgsfd (string, required)
++ body: hoge (string, required)
+
+### Message Patch (object)
++ title: afgfgsfd (string)
++ body: hoge (string)
++ state: open (string)
+
+### Comment (object)
++ id: 234123 (number)
++ body: hogefaasdfl (string, required)
++ creator (User, required)
++ created_at: `2015-08-05T08:40:51.620Z` (string, required)
++ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
+
+### Comment Post (object)
++ body: foobar (string, required)
++ created_at: `2015-08-05T08:40:51.620Z` (string, required)
++ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
+
+### Task (object)
++ id: 234234 (number)
++ title: todo something (string, required)
++ body: do something (string, required)
++ assignee (User, required)
++ start_date: `2015-07-01` (string)
++ end_date: `2015-08-05` (string)
++ created_at: `2015-08-05T08:40:51.620Z` (string, required)
++ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
+
+### Task Post (object)
++ title: todo something (string, required)
++ body: do something (string)
++ assignee: 13224 (number)
++ start_date: `2015-07-01` (string)
++ end_date: `2015-08-05` (string)
+
+### User (object)
++ id: 2324 (number, required)
++ name: Mr. foobar (string, required)
++ email: hoge@test.co.jp (string, required)
++ avatar: https://hoge.avatar.co.jp/hoge.img (string, required)
++ team: 'hoge team' (string, required)
++ team_id: 10
+
+# Group Project
+
+## Project Collection [/projects]
+
+### List All Projects [GET]
++ Relation: self
++ Response 200 (application/json)
+    + Attributes (array[Project])
+
+### Create a New Project [POST]
++ Relation: create
++ Request (application/json)
+    + Attributes (Project Post)
+
++ Response 201 (application/json)
+    + Attributes (Project)
+
+
+## Project [/projects/{id}]
+
+### Delete a Project [DELETE]
++ Relation: destroy
++ Response 204
+
+
+# Group Message
+
+## Message Collection [/projects/{project_id}/messages{?page,sort,state}]
+
++ Parameters
+    + project_id (number, required)
+
+### List All Messages [GET]
++ Relation: self
+
++ Parameters
+    + page (number, optional) - Number of page
+    + sort (enum[string], optional)
+        Order of returned messages
+        + Members
+            + created
+            + updated
+
++ Response 200 (application/json)
+  + Headers
+    
+            Link: <https://talktracker.io/api/v1/{team}/projects/{id}/messages?page=2>; rel="next", <https://talktracker.io/api/v1/{team}/projects/{id}/messages?page=10>; rel="last"
+  
+  + Attributes (array[Message])
+  
+
+### Create a New Message [POST]
++ Relation: create
++ Request (application/json)
+    + Attributes (Message Post)
++ Response 201 (application/json)
+    + Attributes (Message)
+
+
+
+## Message [/projects/{project_id}/messages/{id}]  
+  
++ Parameters
+    + id (number, required)
+    + project_id (number, required)
+
+### Update a Message [PATCH]
++ Relation: update
++ Request (application/json)
+    + Attributes (Message Patch)
++ Response 200 (application/json)
+    + Attributes (Message)
+
+
+# Group Comment
+    
+## Comment Collection [/projects/{project_id}/messages/{message_id}/comments{?since}]
+
++ Parameters
+    + project_id (number, required)
+    + message_id (number, required)
+
+### List All Comments [GET]
++ Relation: self
+
++ Parameters
+    + since: `2015-08-05T08:40:51.620Z` (string, optional)
+
++ Response 200 (application/json)
+    + Attributes (array[Comment])
+
+
+### Create a New Comment [POST]
++ Relation: create
++ Request (application/json)
+    + Attributes (Comment Post)
+
++ Response 201 (application/json)
+    + Attributes (Comment)
+
+## Comment [/projects/{project_id}/messages/{message_id}/comments/{id}]
+
++ Parameters
+    + id (number, required)
+    + project_id (number, required)
+    + message_id (number, required)
+    
+
+### Get a Comment [GET]
++ Relation: instance
++ Response 200 (appliation/json)
+    + Attributes (Comment)
+
+### Update a Comment [PATCH]
++ Relation: update
++ Request (application/json)
+    + Attributes
+        + body: foalfajsdlf (string)
++ Response 200 (appliaction/json)
+    + Attributes (Comment)
+
+### Delete a Comment [DELETE]
++ Relation: destroy
++ Response 204 (application/json)
+
+
+# Group Task
+
+## Task Collection [/projects/{project_id}/tasks]
+
++ Parameters
+    + project_id (number, required)
+
+### List All Tasks [GET]
++ Relation: self
++ Response 200 (application/json)
+    + Attributes (array[Task])
+
+### Create a New Task [POST]
++ Relation: create
++ Request (application/json)
+    + Attributes (Task Post)
++ Response 201 (application/json)
+    + Attributes (Task)
+    
+
+## Task [/projects/{project_id}/tasks/{id}]
+
++ Parameters
+    + id (number, required)
+    + project_id (number, required)
+
+### Get a Task [GET]
++ Relation: instance
++ Response 200 (application/json)
+    + Attributes (Task)
+
+### Update a Task [PATCH]
++ Relation: update
++ Request (application/json)
+    + Attributes (Task Post)
++ Response 200 (application/json)
+    + Attributes (Task)
+
+### Delete a Task [DELETE]
++ Relation: destroy
++ Response 204
