@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://talktracker.io/api/v1
+HOST: https://talktracker.io/api/v1/
 
 # TalkTracker API
 
@@ -12,13 +12,11 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + name: Test Project (string, required)
 + description: This is test project (string)
 + created_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ team: alpha@team.co.jp (string, required)
-+ team_id: 102 (number, required)
-+ activity_url: https://talktracker.io/api/v1/{team}/projects/{id}/activities (string, required)
-+ messages_url: https://talktracker.io/api/v1/{team}/projects/{id}/messages (string, required)
-+ tasks_url: https://talktracker.io/api/v1/{team}/projects/{id}/tasks (string, required)
-+ settings_url: https://talktracker.io/api/v1/{team}/projects/{id}/settings (string, required)
++ updated_at: `2015-08-05T08:40:51.620Z` (string, required)
++ activity_url: https://talktracker.io/api/v1/projects/{id}/activities (string, required)
++ messages_url: https://talktracker.io/api/v1/projects/{id}/messages (string, required)
++ tasks_url: https://talktracker.io/api/v1/projects/{id}/tasks (string, required)
++ settings_url: https://talktracker.io/api/v1/projects/{id}/settings (string, required)
 
 ### Project Post (object)
 + name: New project (string, required)
@@ -28,10 +26,11 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + id: 101 (number, required)
 + title: adjald (string, required)
 + body: hoge (string, required)
++ number: 10012 (string, required)
 + state: open (string, required)
 + creator (User)
 + created_at
-+ comments_url: https://talktracker.io/api/v1/{team}/projects/{id}/messages/{messageid}/comments (string, required)
++ comments_url: https://talktracker.io/api/v1/projects/{id}/messages/{messageid}/comments (string, required)
 
 ### Message Post (object)
 + title: afgfgsfd (string, required)
@@ -47,12 +46,12 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + body: hogefaasdfl (string, required)
 + creator (User, required)
 + created_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
++ updated_at: `2015-08-05T08:40:51.620Z` (string, required)
 
 ### Comment Post (object)
 + body: foobar (string, required)
 + created_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
++ updated_at: `2015-08-05T08:40:51.620Z` (string, required)
 
 ### Task (object)
 + id: 234234 (number)
@@ -62,7 +61,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + start_date: `2015-07-01` (string)
 + end_date: `2015-08-05` (string)
 + created_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ upadted_at: `2015-08-05T08:40:51.620Z` (string, required)
++ updated_at: `2015-08-05T08:40:51.620Z` (string, required)
 
 ### Task Post (object)
 + title: todo something (string, required)
@@ -78,6 +77,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + avatar: https://hoge.avatar.co.jp/hoge.img (string, required)
 + team: 'hoge team' (string, required)
 + team_id: 10
+
 
 # Group Project
 
@@ -124,11 +124,11 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 
 + Response 200 (application/json)
   + Headers
-    
-            Link: <https://talktracker.io/api/v1/{team}/projects/{id}/messages?page=2>; rel="next", <https://talktracker.io/api/v1/{team}/projects/{id}/messages?page=10>; rel="last"
-  
+
+            Link: <https://talktracker.io/api/v1/projects/{id}/messages?page=2>; rel="next", <https://talktracker.io/api/v1/projects/{id}/messages?page=10>; rel="last"
+
   + Attributes (array[Message])
-  
+
 
 ### Create a New Message [POST]
 + Relation: create
@@ -139,8 +139,8 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 
 
 
-## Message [/projects/{project_id}/messages/{id}]  
-  
+## Message [/projects/{project_id}/messages/{id}]
+
 + Parameters
     + id (number, required)
     + project_id (number, required)
@@ -154,7 +154,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 
 
 # Group Comment
-    
+
 ## Comment Collection [/projects/{project_id}/messages/{message_id}/comments{?since}]
 
 + Parameters
@@ -185,7 +185,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
     + id (number, required)
     + project_id (number, required)
     + message_id (number, required)
-    
+
 
 ### Get a Comment [GET]
 + Relation: instance
@@ -223,7 +223,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
     + Attributes (Task Post)
 + Response 201 (application/json)
     + Attributes (Task)
-    
+
 
 ## Task [/projects/{project_id}/tasks/{id}]
 
