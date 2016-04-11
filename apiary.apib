@@ -76,6 +76,28 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + email: hoge@test.co.jp (string, required)
 + avatar: https://hoge.avatar.co.jp/hoge.img (string, required)
 
+# Authentication
+
+## Login [/sessions]
+
+### Login [POST]
++ Relation: create
++ Request (application/json)
+    + Attributes
+        + username (string, required)
+        + password (string, required)
++ Response 302
+    + Headers
+            
+            Location: https://talktracker.io/?/
+
+## Authenticated User [/user]
+
+### Get a Current User [GET]
++ Relation: instance
++ Response 200 (application/json)
+    + Attributes (User)
+
 # Group Project
 
 ## Project Collection [/projects]
