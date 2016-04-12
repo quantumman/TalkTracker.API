@@ -22,6 +22,20 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + name: New project (string, required)
 + description: This is test project
 
+### Project Event (object)
++ actor (User, required)
++ event (enum[string])
+    + Members
+        + closed
+        + reopend
+        + referenced
+        + tagged
+        + untagged
+        + renamed
+        + task_connected
+        + task_unconnected
++ creatd_on: `2015-08-05T08:40:51.620Z` (string, required)
+
 ### Message (object)
 + id: 10 (number, required)
 + title: adjald (string, required)
@@ -76,6 +90,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + email: hoge@test.co.jp (string, required)
 + avatar: https://hoge.avatar.co.jp/hoge.img (string, required)
 
+
 # Group Authentication
 
 ## Login [/sessions]
@@ -97,7 +112,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + Relation: instance
 + Response 200 (application/json)
     + Attributes (User)
-    
+
 
 # Group Project
 
@@ -119,9 +134,23 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 
 ## Project [/projects/{id}]
 
++ Parameters
+    + id (number, required)
+
 ### Delete a Project [DELETE]
 + Relation: destroy
 + Response 204
+
+## Event Collection [/projects/{id}/events{?page}]
+
++ Parameters
+    + id (number, required)
+    + page (number, optional)
+
+### List Events [GET]
++ Relation: self
++ Response 200 (application/json)
+    + Attributes (array[Project Event])
 
 
 # Group Message
