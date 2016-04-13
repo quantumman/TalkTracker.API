@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://talktracker.io/api/v1/
+HOST: http://localhost:8080/api/v1/
 
 # TalkTracker API
 
@@ -13,11 +13,11 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + description: This is test project (string)
 + created_at: `2015-08-05T08:40:51.620Z` (string, required)
 + updated_at: `2015-08-05T08:40:51.620Z` (string, required)
-+ activity_url: https://talktracker.io/api/v1/projects/43/activities (string, required)
-+ messages_url: https://talktracker.io/api/v1/projects/43/messages (string, required)
-+ tasks_url: https://talktracker.io/api/v1/projects/43/tasks (string, required)
-+ settings_url: https://talktracker.io/api/v1/projects/43/settings (string, required)
-+ events_url: https://talktracker.io/api/v1/proejects/43/events (string, required)
++ activity_url: http://localhost:8080/api/v1/projects/43/activities (string, required)
++ messages_url: http://localhost:8080/api/v1/projects/43/messages (string, required)
++ tasks_url: http://localhost:8080/api/v1/projects/43/tasks (string, required)
++ settings_url: http://localhost:8080/api/v1/projects/43/settings (string, required)
++ events_url: http://localhost:8080/api/v1/proejects/43/events (string, required)
 
 ### Project Post (object)
 + name: New project (string, required)
@@ -45,7 +45,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + state: open (string, required)
 + creator (User)
 + created_at
-+ comments_url: https://talktracker.io/api/v1/projects/43/messages/{messageid}/comments (string, required)
++ comments_url: http://localhost:8080/api/v1/projects/43/messages/{messageid}/comments (string, required)
 
 ### Message Post (object)
 + title: afgfgsfd (string, required)
@@ -104,8 +104,8 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
         + password (string, required)
 + Response 302
     + Headers
-            
-            Location: https://talktracker.io/?/
+
+            Location: http://localhost:8080/?/
 
 ## Authenticated User [/user]
 
@@ -175,7 +175,7 @@ TalkTracker is a simple API allowing consumers to access resources of TalkTracke
 + Response 200 (application/json)
   + Headers
 
-            Link: <https://talktracker.io/api/v1/projects/{id}/messages?page=2>; rel="next", <https://talktracker.io/api/v1/projects/{id}/messages?page=10>; rel="last"
+            Link: <http://localhost:8080/api/v1/projects/{id}/messages?page=2>; rel="next", <http://localhost:8080/api/v1/projects/{id}/messages?page=10>; rel="last"
 
   + Attributes (array[Message])
 
